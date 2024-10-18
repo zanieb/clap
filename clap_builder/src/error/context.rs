@@ -7,6 +7,8 @@ pub enum ContextKind {
     InvalidSubcommand,
     /// The cause of the error
     InvalidArg,
+    /// Existing command
+    PriorCommand,
     /// Existing arguments
     PriorArg,
     /// Accepted subcommands
@@ -45,6 +47,7 @@ impl ContextKind {
         match self {
             Self::InvalidSubcommand => Some("Invalid Subcommand"),
             Self::InvalidArg => Some("Invalid Argument"),
+            Self::PriorCommand => Some("Prior Command"),
             Self::PriorArg => Some("Prior Argument"),
             Self::ValidSubcommand => Some("Valid Subcommand"),
             Self::ValidValue => Some("Valid Value"),

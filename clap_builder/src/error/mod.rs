@@ -524,10 +524,13 @@ impl<F: ErrorFormatter> Error<F> {
 
         #[cfg(feature = "error-context")]
         {
-            err = err.extend_context_unchecked([(
-                ContextKind::InvalidSubcommand,
-                ContextValue::String(subcmd),
-            )]);
+            err = err.extend_context_unchecked([
+                (ContextKind::InvalidSubcommand, ContextValue::String(subcmd)),
+                (
+                    ContextKind::PriorCommand,
+                    ContextValue::String(cmd.get_name().to_string()),
+                ),
+            ]);
             if let Some(usage) = usage {
                 err = err
                     .insert_context_unchecked(ContextKind::Usage, ContextValue::StyledStr(usage));
